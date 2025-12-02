@@ -1,0 +1,54 @@
+$docker run hello-world
+$docker images => les images dispoinible sur sys
+$docker  ps => ( les conteneur en cours d execution)   ,
+$docker ps -a tous les contenur mme qui sont arreteur ( docker system prune nettoiyage ) 
+$docker run -it alpine:latest /bin/sh
+( it = mode interactif ,,, exectuion dans /bin/sh)
+   - instaler curl dans le reportoir d excution : #apk add --no-cache curl
+   - # echo " hello riham " > hello.txt
+   - # more hello.txt
+$docker export 2a07e20ccc9b -o my_container.tar => cree un fichier compress.tar
+$docker import my_container.tar my_new_image:v1
+$docker images => my_new_image:v1      38ba61d2a2eb       20.4MB         6.21MB 
+$pour tester on a utiliser  docker run --name test_image -it my_new_image:v1 /bin/sh  si on faitn, ls on trouve le hello.txt cree 
+$docker run -it --name riham2 alpine:latest /bin/sh
+/ # ls
+bin    etc    lib    mnt    proc   run    srv    tmp    var
+dev    home   media  opt    root   sbin   sys    usr
+$docker run --name test_image2 -it my_new_image:v1 /bin/sh
+/ # ls
+bin        etc        home       media      opt        root       sbin       sys        usr
+dev        hello.txt  lib        mnt        proc       run        srv        tmp        var
+
+$docker volume create monvolumedemo
+monvolumedemo
+$docker volume ls
+DRIVER    VOLUME NAME
+local     monvolumedemo
+$ docker volume inspect monvolumedemo
+$docker volume create monv
+$docker run -it -v monv:/data alpine sh 
+$docker rm 0f5449f37662 on le supprime puis on teste
+$docker run --name conteneuravecvolume -it -v monv:/data a
+lpine sh => on trouve le repertoire data
+$docker run -it -v .:/app alpine sh
+
+
+
+exercie sur volume ++++++++
+$docker network ls
+$docker run -d --name netweb nginx
+$docker network inspect bridge
+$docker run --network host nginx
+$docker run --network none -it alpine sh => ping google.com dont work
+$docker run -it alpine sh here it work car y a pas isolation ? 
+$ docker run -d --name site --network monreseau nginx
+$docker run -d --name api --network monreseau alpine sleep 1000
+$docker network (dis)connect monreseau site
+
+ page statique html et indique a nignx que cette page sera utiliser 
+ creation docker file  = > FROM alpine:latest
+
+CMD echo "BONJOUR RIHAM"
+ $ docker build -t mon-app .
+ $ docker run mon-app
